@@ -6,4 +6,11 @@
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
     </style>
 
+    <style name="BootTheme" parent="Theme.BootSplash">
+        <item name="android:windowBackground">@drawable/compat_splash_screen</item>
+        <item name="bootSplashBackground">@android:color/white</item>
+        <item name="bootSplashLogo">@drawable/transparent_pixel</item>
+        <item name="postBootSplashTheme">@style/AppTheme</item>
+    </style>
+
 </resources>
