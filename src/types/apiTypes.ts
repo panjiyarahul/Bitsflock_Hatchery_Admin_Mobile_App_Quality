@@ -27,6 +27,16 @@ export interface ILoginRequest {
   password: string;
 }
 
+export interface IRegisterRequest {
+  firstName: string;
+  lastName: string;
+  address: string;
+  phoneNumber1: string;
+  designation: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export interface IStringifiedApiResponse<T> {
   code: number;
   message: string;

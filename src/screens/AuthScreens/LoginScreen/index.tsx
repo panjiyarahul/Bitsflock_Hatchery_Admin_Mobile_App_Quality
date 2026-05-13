@@ -3,18 +3,25 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
+  Text,
   View,
 } from 'react-native';
-import { getAppLogo } from '../../assets';
-import { Button, Container, InputField } from '../../components';
-import { COLORS } from '../../constants';
-import { useLoginMutation } from '../../redux/api/userAPI';
-import { errorMessage } from '../../utils/helper';
+import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { getAppLogo } from '../../../assets';
+import { Button, Container, InputField } from '../../../components';
+import { COLORS } from '../../../constants';
+import type { AuthStackParamList } from '../../../navigation/AuthStack';
+import { useLoginMutation } from '../../../redux/api/userAPI';
+import { errorMessage } from '../../../utils/helper';
 import Toast from 'react-native-simple-toast';
 import { styles } from './styles';
 
 const LoginScreen = () => {
+  const navigation =
+    useNavigation<StackNavigationProp<AuthStackParamList, 'LoginScreen'>>();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -95,6 +102,19 @@ const LoginScreen = () => {
                 onPress={handleLogin}
                 title="Login"
               />
+
+              <View style={styles.registerPromptContainer}>
+                <Text style={styles.registerPromptText}>
+                  Don't have account ?{' '}
+                </Text>
+                <Pressable
+                  accessibilityRole="button"
+                  onPress={() => navigation.navigate('RegisterScreen')}
+                  style={({ pressed }) => pressed && styles.registerPressed}
+                >
+                  <Text style={styles.registerLink}>Register</Text>
+                </Pressable>
+              </View>
             </View>
           </View>
         </ScrollView>

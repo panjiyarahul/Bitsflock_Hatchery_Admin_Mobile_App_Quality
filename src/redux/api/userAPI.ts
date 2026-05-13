@@ -5,8 +5,10 @@ import { setAuthSession, toFormData } from '../../utils/helper';
 import { baseQueryWithReauth } from '../../utils/baseQueryWithReauth';
 import { SERVER } from '../../constants/config';
 import {
+  BasicResponse,
   ILoginApiResponse,
   ILoginRequest,
+  IRegisterRequest,
   IStoredAuthSession,
 } from '../../types/apiTypes';
 
@@ -92,7 +94,39 @@ export const userAPI = createApi({
       },
       invalidatesTags: ['user'],
     }),
+    register: builder.mutation<BasicResponse, IRegisterRequest>({
+      async queryFn(user, _queryApi, _extraOptions, baseQuery) {
+        try {
+          const access_token = await getAccessToken(
+            baseQuery,
+            _queryApi,
+            _extraOptions,
+          );
+
+          const registerResponse = await baseQuery({
+            url: '/api/employeeapi/signup-breeder-farm',
+            method: 'POST',
+            body: toFormData(user),
+            headers: { Authorization: `Bearer ${access_token}` },
+          });
+
+          if (registerResponse.error) {
+            return { error: registerResponse.error as FetchBaseQueryError };
+          }
+
+          return { data: registerResponse.data as BasicResponse };
+        } catch (error) {
+          return {
+            error: {
+              status: 'FETCH_ERROR',
+              error: (error as Error).message,
+            } as FetchBaseQueryError,
+          };
+        }
+      },
+      invalidatesTags: ['user'],
+    }),
   }),
 });
 
-export const { useLoginMutation } = userAPI;
+export const { useLoginMutation, useRegisterMutation } = userAPI;

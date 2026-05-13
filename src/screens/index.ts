@@ -1,5 +1,6 @@
 //Auth Screens
-import LoginScreen from './LoginScreen';
+import LoginScreen from './AuthScreens/LoginScreen';
+import RegisterScreen from './AuthScreens/RegisterScreen';
 
 //DashBoard Screens
 import HomeScreen from './DashboardScreens/HomeScreen';
@@ -24,6 +25,7 @@ import SalesDetailsScreen from './DashboardScreens/SalesReportScreens/SalesDetai
 export {
   //Auth Screen
   LoginScreen,
+  RegisterScreen,
 
   //DashBoard Screens
   HomeScreen,

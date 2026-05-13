@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { moderateScale, verticalScale } from '../../constants/dimensions';
+import { moderateScale, verticalScale } from '../../../constants/dimensions';
 
 export const styles = StyleSheet.create({
   keyboardContainer: {
