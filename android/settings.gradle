@@ -1,6 +1,21 @@
 pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
 plugins { id("com.facebook.react.settings") }
-extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+  ex.autolinkLibrariesFromCommand(
+    ["npx", "@react-native-community/cli", "config"],
+    file(".."),
+    files(
+      "../yarn.lock",
+      "../package-lock.json",
+      "../package.json",
+      "../react-native.config.js",
+      "app/build.gradle",
+      "app/src/main/AndroidManifest.xml",
+      "app/src/main/java/com/qualitypoultry/MainActivity.kt",
+      "app/src/main/java/com/qualitypoultry/MainApplication.kt"
+    )
+  )
+}
 rootProject.name = 'QualityPoultry'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')

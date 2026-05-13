@@ -1,4 +1,4 @@
-package com.qualitypoultry
+package com.breederfarmadmin
 
 import android.os.Bundle
 import com.facebook.react.ReactActivity

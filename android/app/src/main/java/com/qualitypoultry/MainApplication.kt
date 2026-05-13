@@ -1,4 +1,4 @@
-package com.qualitypoultry
+package com.breederfarmadmin
 
 import android.app.Application
 import com.facebook.react.PackageList
