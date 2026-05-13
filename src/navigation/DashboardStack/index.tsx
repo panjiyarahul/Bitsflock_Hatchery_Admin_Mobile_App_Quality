@@ -7,6 +7,7 @@ import {
   PenListScreen,
   FlockFarmListScreen,
   FlockReportScreen,
+  FeedProgramScreen,
   ClosedBatchesListScreen,
   ClosedBatchesFlocksScreen,
   SalesReportListScreen,
@@ -20,6 +21,7 @@ export type AuthStackParamList = {
   PenListScreen: { id?: number; flockName?: string } | undefined;
   FlockFarmListScreen: undefined;
   FlockReportScreen: undefined;
+  FeedProgramScreen: { id?: number | string } | undefined;
   ClosedBatchesListScreen: undefined;
   ClosedBatchesFlocksScreen: undefined;
   SalesReportListScreen: undefined;
@@ -36,6 +38,7 @@ const DashBoardStack: React.FC = () => (
     <Stack.Screen name="PenListScreen" component={PenListScreen} />
     <Stack.Screen name="FlockFarmListScreen" component={FlockFarmListScreen} />
     <Stack.Screen name="FlockReportScreen" component={FlockReportScreen} />
+    <Stack.Screen name="FeedProgramScreen" component={FeedProgramScreen} />
     <Stack.Screen
       name="ClosedBatchesListScreen"
       component={ClosedBatchesListScreen}

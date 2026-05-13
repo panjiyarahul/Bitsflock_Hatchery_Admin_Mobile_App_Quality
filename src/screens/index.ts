@@ -10,6 +10,7 @@ import FlockListScreen from './DashboardScreens/ActiveFarmScreens/FlockListScree
 import PenListScreen from './DashboardScreens/ActiveFarmScreens/PenListScreen';
 import FlockFarmListScreen from './DashboardScreens/ActiveFarmScreens/FlockFarmListScreen';
 import FlockReportScreen from './DashboardScreens/ActiveFarmScreens/FlockReportScreen';
+import FeedProgramScreen from './DashboardScreens/ActiveFarmScreens/FeedProgramScreen';
 
 //Closed Batches Screens
 import ClosedBatchesListScreen from './DashboardScreens/ClosedBatchesScreens/ClosedBatchesListScreen';
@@ -33,6 +34,7 @@ export {
   PenListScreen,
   FlockFarmListScreen,
   FlockReportScreen,
+  FeedProgramScreen,
 
   //Closed Batches Screens
   ClosedBatchesListScreen,

@@ -86,8 +86,8 @@ const FlockFarmListScreen = ({ route }: any) => {
     <Container backgroundColor={COLORS.primary} style={styles.container}>
       <Header
         title="Report"
-        rightButtonName="Feed Program"
-        onRightPress={() => {}}
+        // rightButtonName="Feed Program"
+        // onRightPress={() => navigation.navigate('FeedProgramScreen', { id })}
       />
 
       {isLoading ? (

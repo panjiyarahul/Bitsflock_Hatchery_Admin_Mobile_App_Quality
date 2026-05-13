@@ -68,7 +68,7 @@ export const activeflockAPI = createApi({
 export const {
   useGetFlockListQuery,
   useGetPenListQuery,
-  useGetFlockFarmListQuery,
   useGetFeedProgramReportQuery,
+  useGetFlockFarmListQuery,
   useGetFlockReportQuery,
 } = activeflockAPI;
