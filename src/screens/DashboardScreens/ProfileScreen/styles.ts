@@ -92,6 +92,51 @@ export const styles = StyleSheet.create({
     fontSize: moderateScale(17),
     fontWeight: '600',
   },
+  securityTab: {
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: BORDER_RADIUS.lg,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: SPACING.md,
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.md,
+    shadowColor: '#000000',
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    elevation: 3,
+  },
+  securityTabText: {
+    color: COLORS.secondary,
+    fontSize: moderateScale(16),
+    fontWeight: '700',
+  },
+  securityTabPressed: {
+    opacity: 0.76,
+  },
+  securityCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: BORDER_RADIUS.lg,
+    marginTop: SPACING.sm,
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.md,
+  },
+  deleteAccountButton: {
+    alignSelf: 'flex-start',
+    paddingVertical: SPACING.xs,
+  },
+  deleteAccountDisabled: {
+    opacity: 0.5,
+  },
+  deleteAccountText: {
+    color: '#DC2626',
+    fontSize: moderateScale(16),
+    fontWeight: '700',
+  },
   footer: {
     paddingHorizontal: SPACING.md,
     paddingTop: SPACING.sm,

@@ -1,18 +1,26 @@
-import React from 'react';
-import { Alert, ScrollView, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Pressable, ScrollView, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Toast from 'react-native-simple-toast';
 import { Button, Container, Header } from '../../../components';
 import { COLORS } from '../../../constants';
 import { dashboardAPI } from '../../../redux/api/dashboardAPI';
-import { profileAPI, useGetProfileQuery } from '../../../redux/api/profileAPI';
+import {
+  profileAPI,
+  useDeleteBreederFarmerMutation,
+  useGetProfileQuery,
+} from '../../../redux/api/profileAPI';
 import { clearUser } from '../../../redux/reducer/userReducer';
-import { clearUserDetail } from '../../../utils/helper';
+import { clearUserDetail, errorMessage } from '../../../utils/helper';
 import { styles } from './styles';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const { data, isLoading, isFetching } = useGetProfileQuery();
+  const [deleteBreederFarmer, { isLoading: isDeletingAccount }] =
+    useDeleteBreederFarmerMutation();
+  const [showAccountSecurity, setShowAccountSecurity] = useState(false);
 
   const profileFields = [
     { label: 'Name', value: data?.name },
@@ -20,6 +28,13 @@ const ProfileScreen = () => {
     { label: 'Phone Number 1', value: data?.phone_number_1 },
     { label: 'Phone Number 2', value: data?.phone_number_2 },
   ];
+
+  const clearSession = async () => {
+    await clearUserDetail();
+    dispatch(clearUser());
+    dispatch(dashboardAPI.util.resetApiState());
+    dispatch(profileAPI.util.resetApiState());
+  };
 
   const handleLogout = () => {
     Alert.alert('Logout', 'Do you want to logout?', [
@@ -30,11 +45,39 @@ const ProfileScreen = () => {
       {
         text: 'Logout',
         style: 'destructive',
+        onPress: clearSession,
+      },
+    ]);
+  };
+
+  const handleDeleteAccount = () => {
+    Alert.alert('Delete Account', 'Do you want to delete account?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        style: 'destructive',
         onPress: async () => {
-          await clearUserDetail();
-          dispatch(clearUser());
-          dispatch(dashboardAPI.util.resetApiState());
-          dispatch(profileAPI.util.resetApiState());
+          const phonenumber =
+            data?.phone_number_1?.trim() || data?.phone_number_2?.trim() || '';
+
+          if (!phonenumber) {
+            Toast.show('Phone number not found', Toast.SHORT);
+            return;
+          }
+
+          try {
+            const response = await deleteBreederFarmer(phonenumber).unwrap();
+            Toast.show(
+              response?.message || 'Account deleted successfully',
+              Toast.SHORT,
+            );
+            await clearSession();
+          } catch (error) {
+            Toast.show(errorMessage(error), Toast.SHORT);
+          }
         },
       },
     ]);
@@ -72,6 +115,43 @@ const ProfileScreen = () => {
               </View>
             ))}
           </View>
+
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => setShowAccountSecurity(current => !current)}
+            style={({ pressed }) => [
+              styles.securityTab,
+              pressed && styles.securityTabPressed,
+            ]}
+          >
+            <Text style={styles.securityTabText}>Account Security</Text>
+            <Ionicons
+              name={
+                showAccountSecurity
+                  ? 'chevron-up-outline'
+                  : 'chevron-down-outline'
+              }
+              size={22}
+              color={COLORS.secondary}
+            />
+          </Pressable>
+
+          {showAccountSecurity ? (
+            <View style={styles.securityCard}>
+              <Pressable
+                accessibilityRole="button"
+                disabled={isDeletingAccount}
+                onPress={handleDeleteAccount}
+                style={({ pressed }) => [
+                  styles.deleteAccountButton,
+                  pressed && styles.securityTabPressed,
+                  isDeletingAccount && styles.deleteAccountDisabled,
+                ]}
+              >
+                <Text style={styles.deleteAccountText}>Delete Account</Text>
+              </Pressable>
+            </View>
+          ) : null}
         </ScrollView>
 
         <View style={styles.footer}>
