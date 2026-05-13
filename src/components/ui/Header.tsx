@@ -9,15 +9,26 @@ import { COLORS } from '../../constants';
 
 type HeaderProps = {
   title: string;
+  whiteBg?: boolean;
   rightButtonName?: string;
   onRightPress?: () => void;
 };
 
-const Header = ({ title, rightButtonName, onRightPress }: HeaderProps) => {
+const Header = ({
+  title,
+  whiteBg,
+  rightButtonName,
+  onRightPress,
+}: HeaderProps) => {
   const navigation = useNavigation<StackNavigationProp<any>>();
 
   return (
-    <View style={styles.header}>
+    <View
+      style={[
+        styles.header,
+        { backgroundColor: whiteBg ? COLORS.white : COLORS.primary },
+      ]}
+    >
       <View style={styles.sideSlot}>
         <Pressable
           accessibilityLabel="Go back"
@@ -28,7 +39,11 @@ const Header = ({ title, rightButtonName, onRightPress }: HeaderProps) => {
             pressed && styles.buttonPressed,
           ]}
         >
-          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            color={whiteBg ? '#000000"' : '#FFFFFF'}
+          />
         </Pressable>
       </View>
 
@@ -66,7 +81,6 @@ const styles = StyleSheet.create({
     minHeight: verticalScale(72),
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.md,
-    backgroundColor: COLORS.primary,
     borderBottomLeftRadius: moderateScale(35),
     flexDirection: 'row',
     alignItems: 'center',

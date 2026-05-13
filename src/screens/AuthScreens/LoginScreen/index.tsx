@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { getAppLogo } from '../../../assets';
 import { Button, Container, InputField } from '../../../components';
 import { COLORS } from '../../../constants';
 import type { AuthStackParamList } from '../../../navigation/AuthStack';
@@ -18,6 +17,7 @@ import { useLoginMutation } from '../../../redux/api/userAPI';
 import { errorMessage } from '../../../utils/helper';
 import Toast from 'react-native-simple-toast';
 import { styles } from './styles';
+import images from '../../../assets';
 
 const LoginScreen = () => {
   const navigation =
@@ -70,7 +70,7 @@ const LoginScreen = () => {
           <View style={styles.centerContent}>
             <View style={styles.logoContainer}>
               <Image
-                source={getAppLogo()}
+                source={images.qualitypoultry}
                 style={styles.logo}
                 resizeMode="contain"
               />

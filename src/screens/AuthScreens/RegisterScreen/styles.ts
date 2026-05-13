@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { moderateScale, verticalScale } from '../../../constants/dimensions';
+import { SPACING } from '../../../constants';
 
 export const styles = StyleSheet.create({
   keyboardContainer: {
     flex: 1,
+    paddingHorizontal: SPACING.sm,
   },
   keyboardContent: {
     flexGrow: 1,

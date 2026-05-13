@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { getAppLogo } from '../../../assets';
-import { Button, Container, InputField } from '../../../components';
+import images from '../../../assets';
+import { Button, Container, Header, InputField } from '../../../components';
 import { COLORS } from '../../../constants';
 import type { AuthStackParamList } from '../../../navigation/AuthStack';
 import { useRegisterMutation } from '../../../redux/api/userAPI';
@@ -65,7 +65,8 @@ const RegisterScreen = () => {
   };
 
   return (
-    <Container barStyle="dark-content">
+    <Container barStyle="dark-content" style={{ paddingHorizontal: 0 }}>
+      <Header title="Register" whiteBg />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 12 : 0}
@@ -82,7 +83,7 @@ const RegisterScreen = () => {
           <View style={styles.centerContent}>
             <View style={styles.logoContainer}>
               <Image
-                source={getAppLogo()}
+                source={images.qualitypoultry}
                 style={styles.logo}
                 resizeMode="contain"
               />
