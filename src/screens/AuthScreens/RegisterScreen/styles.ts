@@ -3,6 +3,9 @@ import { moderateScale, verticalScale } from '../../../constants/dimensions';
 import { SPACING } from '../../../constants';
 
 export const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 0,
+  },
   keyboardContainer: {
     flex: 1,
     paddingHorizontal: SPACING.sm,

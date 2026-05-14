@@ -4,7 +4,14 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Pressable, StyleSheet, TextInput, TextInputProps } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { moderateScale, verticalScale } from '../../constants/dimensions';
@@ -29,10 +36,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
     useImperativeHandle(ref, () => inputRef.current as TextInput);
 
     return (
-      <Pressable
-        onPress={() => inputRef.current?.focus()}
-        style={({ pressed }) => [styles.wrapper, pressed && styles.pressed]}
-      >
+      <View style={styles.wrapper}>
         <Animatable.View
           duration={180}
           easing="ease-out-cubic"
@@ -42,17 +46,15 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             isFocused && styles.inputContainerFocused,
           ]}
         >
-          <Animatable.Text
-            duration={180}
-            easing="ease-out-cubic"
-            transition={['top', 'fontSize']}
+          <Text
+            pointerEvents="none"
             style={[
               styles.label,
               isRaised ? styles.labelRaised : styles.labelBlurred,
             ]}
           >
             {label}
-          </Animatable.Text>
+          </Text>
 
           <TextInput
             ref={inputRef}
@@ -94,7 +96,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             </Pressable>
           ) : null}
         </Animatable.View>
-      </Pressable>
+      </View>
     );
   },
 );

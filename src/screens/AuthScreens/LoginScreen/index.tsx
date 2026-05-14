@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import {
   Image,
-  KeyboardAvoidingView,
-  Platform,
   Pressable,
-  ScrollView,
   Text,
   View,
 } from 'react-native';
@@ -18,6 +15,7 @@ import { errorMessage } from '../../../utils/helper';
 import Toast from 'react-native-simple-toast';
 import { styles } from './styles';
 import images from '../../../assets';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 const LoginScreen = () => {
   const navigation =
@@ -54,71 +52,67 @@ const LoginScreen = () => {
 
   return (
     <Container barStyle="dark-content">
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 12 : 0}
+      <KeyboardAwareScrollView
+        bottomOffset={24}
+        bounces={false}
+        contentContainerStyle={styles.keyboardContent}
+        keyboardDismissMode="none"
+        keyboardShouldPersistTaps="handled"
+        mode="layout"
+        showsVerticalScrollIndicator={false}
         style={styles.keyboardContainer}
       >
-        <ScrollView
-          bounces={false}
-          contentContainerStyle={styles.keyboardContent}
-          keyboardDismissMode="on-drag"
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-          style={styles.keyboardContainer}
-        >
-          <View style={styles.centerContent}>
-            <View style={styles.logoContainer}>
-              <Image
-                source={images.qualitypoultry}
-                style={styles.logo}
-                resizeMode="contain"
-              />
-            </View>
+        <View style={styles.centerContent}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={images.qualitypoultry}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </View>
 
-            <View style={styles.formContainer}>
-              <InputField
-                autoCapitalize="none"
-                keyboardType="default"
-                label="Phone number / User Name"
-                onChangeText={setUserName}
-                returnKeyType="next"
-                value={userName}
-              />
+          <View style={styles.formContainer}>
+            <InputField
+              autoCapitalize="none"
+              keyboardType="default"
+              label="Phone number / User Name"
+              onChangeText={setUserName}
+              returnKeyType="next"
+              value={userName}
+            />
 
-              <InputField
-                autoCapitalize="none"
-                label="Password"
-                onChangeText={setPassword}
-                returnKeyType="done"
-                secureTextEntry
-                value={password}
-              />
+            <InputField
+              autoCapitalize="none"
+              label="Password"
+              onChangeText={setPassword}
+              returnKeyType="done"
+              secureTextEntry
+              value={password}
+            />
 
-              <Button
-                backgroundColor={COLORS.primary}
-                disabled={isLoginDisabled}
-                isLoading={isLoading}
-                onPress={handleLogin}
-                title="Login"
-              />
+            <Button
+              backgroundColor={COLORS.primary}
+              disabled={isLoginDisabled}
+              isLoading={isLoading}
+              onPress={handleLogin}
+              title="Login"
+            />
 
-              <View style={styles.registerPromptContainer}>
-                <Text style={styles.registerPromptText}>
-                  Don't have account ?{' '}
-                </Text>
-                <Pressable
-                  accessibilityRole="button"
-                  onPress={() => navigation.navigate('RegisterScreen')}
-                  style={({ pressed }) => pressed && styles.registerPressed}
-                >
-                  <Text style={styles.registerLink}>Register</Text>
-                </Pressable>
-              </View>
+            <View style={styles.registerPromptContainer}>
+              <Text style={styles.registerPromptText}>
+                Don't have account ?{' '}
+              </Text>
+              <Pressable
+                accessibilityRole="button"
+                onPress={() => navigation.navigate('RegisterScreen')}
+                style={({ pressed }) => pressed && styles.registerPressed}
+              >
+                <Text style={styles.registerLink}>Register</Text>
+              </Pressable>
             </View>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </View>
+      </KeyboardAwareScrollView>
     </Container>
   );
 };
