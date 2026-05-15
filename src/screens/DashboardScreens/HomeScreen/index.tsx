@@ -250,6 +250,51 @@ const HomeScreen = () => {
                       <Text style={styles.lightCardTitle}>Sales Report</Text>
                     </Pressable>
 
+                    <Pressable
+                      onPress={() =>
+                        navigation.navigate('StockWeeklyReportScreen')
+                      }
+                      style={({ pressed }) => [
+                        styles.card,
+                        pressed && styles.pressablePressed,
+                      ]}
+                    >
+                      <Ionicons name="cube" size={22} color="#5E5E5E" />
+                      <Text style={styles.lightCardTitle}>
+                        Stock Weekly Report
+                      </Text>
+                    </Pressable>
+
+                    <Pressable
+                      onPress={() =>
+                        navigation.navigate('PerformanceReportScreen')
+                      }
+                      style={({ pressed }) => [
+                        styles.card,
+                        pressed && styles.pressablePressed,
+                      ]}
+                    >
+                      <Ionicons name="speedometer" size={22} color="#5E5E5E" />
+                      <Text style={styles.lightCardTitle}>
+                        Performance Report
+                      </Text>
+                    </Pressable>
+
+                    <Pressable
+                      onPress={() =>
+                        navigation.navigate('FlockBookReportScreen')
+                      }
+                      style={({ pressed }) => [
+                        styles.card,
+                        pressed && styles.pressablePressed,
+                      ]}
+                    >
+                      <Ionicons name="book" size={22} color="#5E5E5E" />
+                      <Text style={styles.lightCardTitle}>
+                        Flock Book Report
+                      </Text>
+                    </Pressable>
+
                     <View style={[styles.card, styles.stockCard]}>
                       <Text style={styles.stockCount}>{data?.EggQty ?? 0}</Text>
                       <Text style={styles.stockLabel}>Egg Quantity</Text>

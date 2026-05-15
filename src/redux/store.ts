@@ -11,6 +11,7 @@ import { profileAPI } from './api/profileAPI';
 import { activeflockAPI } from './api/activeflockAPI';
 import { closedflockAPI } from './api/closedflockAPI';
 import { salesreportAPI } from './api/salesreportAPI';
+import { reportAPI } from './api/reportAPI';
 
 // persist config for user slice
 const persistConfig = {
@@ -38,6 +39,7 @@ export const store = configureStore({
     [activeflockAPI.reducerPath]: activeflockAPI.reducer,
     [closedflockAPI.reducerPath]: closedflockAPI.reducer,
     [salesreportAPI.reducerPath]: salesreportAPI.reducer,
+    [reportAPI.reducerPath]: reportAPI.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -50,6 +52,7 @@ export const store = configureStore({
       activeflockAPI.middleware,
       closedflockAPI.middleware,
       salesreportAPI.middleware,
+      reportAPI.middleware,
     ),
 });
 

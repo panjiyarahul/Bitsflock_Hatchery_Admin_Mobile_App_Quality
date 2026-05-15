@@ -3,6 +3,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {
   HomeScreen,
   ProfileScreen,
+  StockWeeklyReportScreen,
+  PerformanceReportScreen,
+  FlockBookReportScreen,
+  StockWeeklyReportDetailsScreen,
+  PerformanceReportDetailsScreen,
+  FlockBookReportDetailsScreen,
   FlockListScreen,
   PenListScreen,
   FlockFarmListScreen,
@@ -17,6 +23,14 @@ import {
 export type AuthStackParamList = {
   HomeScreen: undefined;
   ProfileScreen: undefined;
+  StockWeeklyReportScreen: undefined;
+  PerformanceReportScreen: undefined;
+  FlockBookReportScreen: undefined;
+  StockWeeklyReportDetailsScreen:
+    | { flockName?: string; penId?: number | string; penName?: string }
+    | undefined;
+  PerformanceReportDetailsScreen: { flockName?: string } | undefined;
+  FlockBookReportDetailsScreen: { flockName?: string } | undefined;
   FlockListScreen: undefined;
   PenListScreen: { id?: number; flockName?: string } | undefined;
   FlockFarmListScreen: undefined;
@@ -34,6 +48,30 @@ const DashBoardStack: React.FC = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="HomeScreen" component={HomeScreen} />
     <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+    <Stack.Screen
+      name="StockWeeklyReportScreen"
+      component={StockWeeklyReportScreen}
+    />
+    <Stack.Screen
+      name="PerformanceReportScreen"
+      component={PerformanceReportScreen}
+    />
+    <Stack.Screen
+      name="FlockBookReportScreen"
+      component={FlockBookReportScreen}
+    />
+    <Stack.Screen
+      name="StockWeeklyReportDetailsScreen"
+      component={StockWeeklyReportDetailsScreen}
+    />
+    <Stack.Screen
+      name="PerformanceReportDetailsScreen"
+      component={PerformanceReportDetailsScreen}
+    />
+    <Stack.Screen
+      name="FlockBookReportDetailsScreen"
+      component={FlockBookReportDetailsScreen}
+    />
     <Stack.Screen name="FlockListScreen" component={FlockListScreen} />
     <Stack.Screen name="PenListScreen" component={PenListScreen} />
     <Stack.Screen name="FlockFarmListScreen" component={FlockFarmListScreen} />

@@ -1,5 +1,4 @@
-import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import {
   ActivityIndicator,
   RefreshControl,
@@ -11,10 +10,7 @@ import { Container, Header } from '../../../../components';
 import { COLORS } from '../../../../constants';
 import { useGetFeedProgramReportQuery } from '../../../../redux/api/activeflockAPI';
 import { IFeedProgramReportItem } from '../../../../types/apiTypes';
-import {
-  lockFeedProgramOrientation,
-  unlockFeedProgramOrientation,
-} from '../../../../utils/orientationLocker';
+import { useLandscapeReportExit } from '../../../../utils/orientationLocker';
 import { styles } from './styles';
 
 const formatValue = (value: string | number | undefined, fallback = '-') =>
@@ -37,59 +33,8 @@ const parseDoctorData = (value?: string) => {
 
 const FeedProgramScreen = ({ navigation, route }: any) => {
   const { id } = route?.params ?? {};
+  const leaveReportScreen = useLandscapeReportExit(navigation);
   const headerScrollRef = useRef<ScrollView>(null);
-  const exitTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isLeavingRef = useRef(false);
-
-  const leaveFeedProgramScreen = useCallback(
-    (action?: any) => {
-      if (isLeavingRef.current) {
-        return;
-      }
-
-      isLeavingRef.current = true;
-      unlockFeedProgramOrientation();
-
-      exitTimeoutRef.current = setTimeout(() => {
-        if (action) {
-          navigation.dispatch(action);
-          return;
-        }
-
-        navigation.goBack();
-      }, 450);
-    },
-    [navigation],
-  );
-
-  useFocusEffect(
-    useCallback(() => {
-      lockFeedProgramOrientation();
-
-      return () => {
-        unlockFeedProgramOrientation();
-      };
-    }, []),
-  );
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', (event: any) => {
-      if (isLeavingRef.current) {
-        return;
-      }
-
-      event.preventDefault();
-      leaveFeedProgramScreen(event.data.action);
-    });
-
-    return () => {
-      unsubscribe();
-
-      if (exitTimeoutRef.current) {
-        clearTimeout(exitTimeoutRef.current);
-      }
-    };
-  }, [leaveFeedProgramScreen, navigation]);
 
   const { data, isLoading, isFetching, refetch } = useGetFeedProgramReportQuery(
     id,
@@ -209,10 +154,7 @@ const FeedProgramScreen = ({ navigation, route }: any) => {
 
   return (
     <Container backgroundColor={COLORS.primary} style={styles.container}>
-      <Header
-        title="Feed Program"
-        onBackPress={() => leaveFeedProgramScreen()}
-      />
+      <Header title="Feed Program" onBackPress={() => leaveReportScreen()} />
 
       {isLoading ? (
         <View style={styles.loaderContainer}>

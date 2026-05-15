@@ -73,6 +73,34 @@ export interface IPenListItem {
 
 export type IPenListResponse = IPenListItem[];
 
+export interface IReportFlockListItem {
+  id?: number;
+  flockName?: string;
+}
+
+export type IReportFlockListResponse = IReportFlockListItem[];
+
+export interface IReportPenListItem {
+  id?: number;
+  name?: string;
+}
+
+export type IReportPenListResponse = IReportPenListItem[];
+
+export type IReportDetailsItem = Record<
+  string,
+  string | number | boolean | null | undefined
+>;
+
+export interface IReportDetailsData {
+  result?: string | IReportDetailsItem[];
+}
+
+export interface IStockWeeklyReportRequest {
+  flockName: string;
+  penId: number | string;
+}
+
 export interface IFlockFarmBookkeeping {
   flock_Pen_Id?: number;
   flockSize?: number;
