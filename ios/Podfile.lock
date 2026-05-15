@@ -1453,6 +1453,8 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - react-native-orientation-locker (1.7.0):
+    - React-Core
   - react-native-safe-area-context (5.7.0):
     - hermes-engine
     - RCTRequired
@@ -2304,6 +2306,7 @@ DEPENDENCIES:
   - react-native-floating-label-input (from `../node_modules/react-native-floating-label-input`)
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
+  - react-native-orientation-locker (from `../node_modules/react-native-orientation-locker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -2441,6 +2444,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-keyboard-controller"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
+  react-native-orientation-locker:
+    :path: "../node_modules/react-native-orientation-locker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-simple-toast:
@@ -2537,7 +2542,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AsyncStorage: 857a13f3c66a30d6b02efa09babba3d457e8e8ca
   FBLazyVector: 26fd21c75314e101f280d401e97f27d54f3f7064
-  hermes-engine: be4af2e1ae9bfc945f4954e1f142e064a2eaec5f
+  hermes-engine: 8182ed38bb0bcf73fdeeeb72705dc73f8ccd98de
   RCTDeprecation: c7a2768f905d76ca6d2cfefb26e4349eacbdfca3
   RCTRequired: 5e502c3553cfbed090a991c444448da452fb752e
   RCTSwiftUI: 5ce3ccbdc58b78cc4ebbaace01709ec22d58e131
@@ -2546,7 +2551,7 @@ SPEC CHECKSUMS:
   React: 13cf8451582adb1bb324306e1893b91d1cba28c6
   React-callinvoker: 91e6a605826b684ad2e623811253b4d0c4196bef
   React-Core: 46818de5f211b2a2759ac823b591af8a0a95c2c1
-  React-Core-prebuilt: e4a326a91173efffdfd65769f9e7dceb0b8d7b7d
+  React-Core-prebuilt: d29da99839e572e0f828f91aa0b0d1743cd37b28
   React-CoreModules: a6a37afee48d4a31ab398640b0795462647d5c67
   React-cxxreact: 2ec3e2f7a8ae9303460d4ba94cde183ea90d64cd
   React-debug: 0d21117b897ce0359c9d2c9dfe952f237476a14a
@@ -2577,6 +2582,7 @@ SPEC CHECKSUMS:
   react-native-floating-label-input: 825326adbe737cf87b541cff2d06efa137886fd8
   react-native-keyboard-controller: b7261e3052273bff01764eb391d6aaed0cee01d8
   react-native-netinfo: 2f906d5d9a639090ed1c079135d6485a95f749f1
+  react-native-orientation-locker: cc6f357b289a2e0dd2210fea0c52cb8e0727fdaa
   react-native-safe-area-context: 6b4966397ada0f7dd481e4486a2ef936834861a1
   react-native-simple-toast: 606baeb85db508e6633d25e93cecf52b5e2d367e
   React-NativeModulesApple: 993744f42aab769eb02bf5d256b6767c546d0bb5
@@ -2612,7 +2618,7 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 22e2265d86a4e871e5e858f4e7ef1c8d01103680
   ReactCodegen: 5bd23df5c8ad6c87df0bc8ccd391bd37bf6c92d5
   ReactCommon: a804bb8d1dcf3ecdec3a77eb8bba19b7863bbbdb
-  ReactNativeDependencies: 449ed003cb6f1e4d47c4ab384c10ad9f95e7d563
+  ReactNativeDependencies: 4c5de9b2dc3810822683c6411389c703d0ab9b67
   ReactNativeLocalization: 79b100588f6d7a68852b982ccbe57e329e8bb5a7
   RNBootSplash: 65ee0b8120092c12ef024d082016a0ab6bcf035e
   RNGestureHandler: 2ff61eac036eaf89f6818bf4ed9c39771a17d134

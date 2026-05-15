@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
   ActivityIndicator,
   RefreshControl,
@@ -10,6 +11,10 @@ import { Container, Header } from '../../../../components';
 import { COLORS } from '../../../../constants';
 import { useGetFeedProgramReportQuery } from '../../../../redux/api/activeflockAPI';
 import { IFeedProgramReportItem } from '../../../../types/apiTypes';
+import {
+  lockFeedProgramOrientation,
+  unlockFeedProgramOrientation,
+} from '../../../../utils/orientationLocker';
 import { styles } from './styles';
 
 const formatValue = (value: string | number | undefined, fallback = '-') =>
@@ -30,9 +35,61 @@ const parseDoctorData = (value?: string) => {
   }
 };
 
-const FeedProgramScreen = ({ route }: any) => {
+const FeedProgramScreen = ({ navigation, route }: any) => {
   const { id } = route?.params ?? {};
   const headerScrollRef = useRef<ScrollView>(null);
+  const exitTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isLeavingRef = useRef(false);
+
+  const leaveFeedProgramScreen = useCallback(
+    (action?: any) => {
+      if (isLeavingRef.current) {
+        return;
+      }
+
+      isLeavingRef.current = true;
+      unlockFeedProgramOrientation();
+
+      exitTimeoutRef.current = setTimeout(() => {
+        if (action) {
+          navigation.dispatch(action);
+          return;
+        }
+
+        navigation.goBack();
+      }, 450);
+    },
+    [navigation],
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      lockFeedProgramOrientation();
+
+      return () => {
+        unlockFeedProgramOrientation();
+      };
+    }, []),
+  );
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (event: any) => {
+      if (isLeavingRef.current) {
+        return;
+      }
+
+      event.preventDefault();
+      leaveFeedProgramScreen(event.data.action);
+    });
+
+    return () => {
+      unsubscribe();
+
+      if (exitTimeoutRef.current) {
+        clearTimeout(exitTimeoutRef.current);
+      }
+    };
+  }, [leaveFeedProgramScreen, navigation]);
 
   const { data, isLoading, isFetching, refetch } = useGetFeedProgramReportQuery(
     id,
@@ -104,7 +161,9 @@ const FeedProgramScreen = ({ route }: any) => {
 
     return (
       <View key={`row-${index}`} style={[styles.tableRow, rowBackground]}>
-        <Text style={styles.rowText}>{formatValue(item.ActualFemaleBodyWt)}</Text>
+        <Text style={styles.rowText}>
+          {formatValue(item.ActualFemaleBodyWt)}
+        </Text>
         <Text style={styles.rowText}>{formatValue(item.StdBodyFemaleWt)}</Text>
         <Text
           style={[
@@ -150,7 +209,10 @@ const FeedProgramScreen = ({ route }: any) => {
 
   return (
     <Container backgroundColor={COLORS.primary} style={styles.container}>
-      <Header title="Feed Program" />
+      <Header
+        title="Feed Program"
+        onBackPress={() => leaveFeedProgramScreen()}
+      />
 
       {isLoading ? (
         <View style={styles.loaderContainer}>
@@ -203,7 +265,10 @@ const FeedProgramScreen = ({ route }: any) => {
                     ]}
                   >
                     <Text style={styles.weekRowText}>
-                      {formatValue(item.Week?.split(' ')[1], formatValue(item.Week))}
+                      {formatValue(
+                        item.Week?.split(' ')[1],
+                        formatValue(item.Week),
+                      )}
                     </Text>
                   </View>
                 ))}

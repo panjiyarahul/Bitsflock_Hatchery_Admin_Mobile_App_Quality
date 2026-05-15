@@ -1,5 +1,7 @@
 package com.breederfarmadmin
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -14,6 +16,14 @@ class MainActivity : ReactActivity() {
     supportFragmentManager.fragmentFactory = RNScreensFragmentFactory()
     RNBootSplash.init(this, R.style.BootTheme)
     super.onCreate(savedInstanceState)
+  }
+
+  override fun onConfigurationChanged(newConfig: Configuration) {
+    super.onConfigurationChanged(newConfig)
+
+    val intent = Intent("onConfigurationChanged")
+    intent.putExtra("newConfig", newConfig)
+    sendBroadcast(intent)
   }
 
   /**

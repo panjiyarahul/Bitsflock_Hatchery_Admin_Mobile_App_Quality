@@ -11,6 +11,7 @@ type HeaderProps = {
   title: string;
   whiteBg?: boolean;
   rightButtonName?: string;
+  onBackPress?: () => void;
   onRightPress?: () => void;
 };
 
@@ -18,6 +19,7 @@ const Header = ({
   title,
   whiteBg,
   rightButtonName,
+  onBackPress,
   onRightPress,
 }: HeaderProps) => {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -33,7 +35,7 @@ const Header = ({
         <Pressable
           accessibilityLabel="Go back"
           hitSlop={12}
-          onPress={() => navigation.goBack()}
+          onPress={onBackPress ?? (() => navigation.goBack())}
           style={({ pressed }) => [
             styles.backButton,
             pressed && styles.buttonPressed,

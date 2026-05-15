@@ -57,9 +57,7 @@ const FlockFarmListScreen = ({ route }: any) => {
           style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
         >
           <View style={styles.cardTopRow}>
-            <Text style={styles.flockName}>
-              {formatValue(item.flockName, 'Bookkeeping')}
-            </Text>
+            <Text style={styles.flockName}>{formatValue(item.flockName)}</Text>
 
             <View style={styles.agePill}>
               <Ionicons name="time-outline" size={14} color="#FFFFFF" />
@@ -86,8 +84,8 @@ const FlockFarmListScreen = ({ route }: any) => {
     <Container backgroundColor={COLORS.primary} style={styles.container}>
       <Header
         title="Report"
-        // rightButtonName="Feed Program"
-        // onRightPress={() => navigation.navigate('FeedProgramScreen', { id })}
+        rightButtonName="Feed Program"
+        onRightPress={() => navigation.navigate('FeedProgramScreen', { id })}
       />
 
       {isLoading ? (
